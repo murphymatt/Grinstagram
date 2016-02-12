@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Grinstagram</string>
+    <string name="button">New Activity</string>
 </resources>

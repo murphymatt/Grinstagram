@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(mProgressBar);
 
-        
 
     }
 

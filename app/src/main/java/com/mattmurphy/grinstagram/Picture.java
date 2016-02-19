@@ -1,34 +1,29 @@
 package com.mattmurphy.grinstagram;
 
-import android.media.Image;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import com.parse.*;
 
 /**
  * Created by mattmurphy on 2/16/16.
  */
 
-@ParseClassName("Picture")
-public class Picture extends ParseObject {
+public class Picture {
 
-    private Image mImage;
+    // Fields
+    private String mImageUrl;
     private List<String> mComments;
     private int mLikes;
 
-    public Picture() {
+    // Constructor
+    public Picture(String imageUrl) {
+        mImageUrl = imageUrl;
         mComments = new ArrayList<String>();
         mLikes = 0;
     }
 
-    public Image getImage() {
-        return mImage;
-    }
-
-    public void setImage(Image image) {
-        mImage = image;
+    // Methods
+    public String getImageUrl() {
+        return mImageUrl;
     }
 
     public List<String> getComments() {
@@ -41,10 +36,6 @@ public class Picture extends ParseObject {
 
     public int getLikes() {
         return mLikes;
-    }
-
-    public void setLikes(int likes) {
-        mLikes = likes;
     }
 
 }

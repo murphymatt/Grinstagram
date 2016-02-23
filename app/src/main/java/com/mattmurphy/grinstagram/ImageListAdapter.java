@@ -15,9 +15,9 @@ import java.util.List;
  *
  * Manages the image list items' views.
  */
-public class ImageListAdapter extends ArrayAdapter<ImageListItem> {
+public class ImageListAdapter extends ArrayAdapter<Picture> {
 
-    public ImageListAdapter(Context context, int resource, List<ImageListItem> objects) {
+    public ImageListAdapter(Context context, int resource, List<Picture> objects) {
         super(context, resource, objects);
     }
 

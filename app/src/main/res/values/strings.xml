@@ -3,4 +3,5 @@
     <string name="button">New Activity</string>
     <string name="parse_app_id">APPLICATION ID</string>
     <string name="parse_client_key">CLIENT KEY</string>
+    <string name="toggle_comments_text">Toggle Comments</string>
 </resources>

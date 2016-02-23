@@ -38,4 +38,12 @@ public class Picture {
         return mLikes;
     }
 
+    public void incrementLikes() {
+        mLikes++;
+    }
+
+    public void decrementLikes() {
+        mLikes--;
+    }
+
 }

@@ -30,13 +30,20 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
      */
     public View getView(int pos, View convertView, ViewGroup parent) {
         if(convertView == null) {
-            convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.imagelistitem, parent, false);
+            convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.image_list_item, parent, false);
         }
-        ImageView image = (ImageView) convertView.findViewById(R.id.image);
-        ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
-        ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
 
-        //...
+        Picture pic = ImageListAdapter.super.getItem(pos);
+
+        if (pic != null) {
+            ImageView image = (ImageView) convertView.findViewById(R.id.image);
+            ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
+            ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
+
+            if (image != null) {
+                image.setImageDrawable(/* drawable from pic */);
+            }
+        }
 
         return convertView;
     }

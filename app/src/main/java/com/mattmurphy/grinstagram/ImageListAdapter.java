@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -38,11 +40,9 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
         if (pic != null) {
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
-            ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
+            /* Create comments button */
 
-            if (image != null) {
-                image.setImageDrawable(/* drawable from pic */);
-            }
+            Picasso.with(getContext()).load(pic.getImageUrl()).into(image);
         }
 
         return convertView;

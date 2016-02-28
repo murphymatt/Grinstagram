@@ -150,12 +150,5 @@ public class MainActivity extends AppCompatActivity {
 
         likesRef.addChildEventListener(likesListener);
     }
-/*
-    public void changeActivity(View view) {
-        Intent intent = new Intent(this, ButtonActivity.class);
-        startActivity(intent);
-    }
-*/
-
 
 }

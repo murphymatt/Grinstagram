@@ -21,6 +21,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
 
     public ImageListAdapter(Context context, int resource, List<Picture> objects) {
         super(context, resource, objects);
+
     }
     /**
      * TODO: set the contents of image, like, and share based on Firebase

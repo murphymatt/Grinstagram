@@ -11,6 +11,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
         ListView lv = (ListView) findViewById(android.R.id.list);
+        images = new ArrayList<>();
         images.add(new Picture("http://www.cs.grinnell.edu/~birnbaum/grinstagram/android_vector.jpg"));
         images.add(new Picture("http://www.cs.grinnell.edu/~birnbaum/grinstagram/adLogo.png"));
         images.add(new Picture("http://www.cs.grinnell.edu/~birnbaum/grinstagram/Color-Grinnell.gif"));

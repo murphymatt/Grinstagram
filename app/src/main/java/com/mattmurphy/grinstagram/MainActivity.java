@@ -114,17 +114,6 @@ public class MainActivity extends AppCompatActivity {
         // add progress bar to root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(mProgressBar);
-
-        Button testImages = (Button)(findViewById(R.id.testImages));
-        testImages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("images", "Items: " + lv.getAdapter().getCount());
-                for (int i = 0; i < lv.getAdapter().getCount(); i++) {
-                    Log.d("images", "URL: " + ((Picture)(lv.getAdapter().getItem(i))).getImageUrl());
-                }
-            }
-        });
     }
 
     /**

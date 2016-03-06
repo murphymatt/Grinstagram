@@ -2,9 +2,13 @@ package com.mattmurphy.grinstagram;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private ImageListAdapter mAdapter;
     private List<Picture> images;
+    private ListView lv;
     /**
      * The url of the Firebase instance.
      */
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
 
-        ListView lv = (ListView) findViewById(android.R.id.list);
+        lv = (ListView) findViewById(android.R.id.list);
         images = new ArrayList<>();
         images.add(new Picture("http://www.cs.grinnell.edu/~birnbaum/grinstagram/android_vector.jpg"));
         images.add(new Picture("http://www.cs.grinnell.edu/~birnbaum/grinstagram/adLogo.png"));
@@ -110,7 +115,16 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(mProgressBar);
 
-
+        Button testImages = (Button)(findViewById(R.id.testImages));
+        testImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("images", "Items: " + lv.getAdapter().getCount());
+                for (int i = 0; i < lv.getAdapter().getCount(); i++) {
+                    Log.d("images", "URL: " + ((Picture)(lv.getAdapter().getItem(i))).getImageUrl());
+                }
+            }
+        });
     }
 
     /**

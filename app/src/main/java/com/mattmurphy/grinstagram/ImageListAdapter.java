@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +37,8 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
         }
 
         Picture pic = ImageListAdapter.super.getItem(pos);
+//        TextView tv = (TextView) convertView.findViewById(R.id.tv);
+//        tv.setText(pic.getImageUrl());
 
         if (pic != null) {
             ImageView image = (ImageView) convertView.findViewById(R.id.image);

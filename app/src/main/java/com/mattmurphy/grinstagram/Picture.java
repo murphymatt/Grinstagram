@@ -10,15 +10,26 @@ import java.util.List;
 public class Picture {
 
     // Fields
+    private int mId;
     private String mImageUrl;
     private List<String> mComments;
     private int mLikes;
+    private boolean mLiked;
 
     // Constructor
-    public Picture(String imageUrl) {
+    public Picture(int id, String imageUrl) {
+        mId = id;
         mImageUrl = imageUrl;
         mComments = new ArrayList<String>();
         mLikes = 0;
+    }
+
+    public Picture(int id, String imageUrl, boolean liked, int likes, List<String> comments) {
+        mId = id;
+        mImageUrl = imageUrl;
+        mLiked = liked;
+        mLikes = likes;
+        mComments = comments;
     }
 
     // Methods
@@ -45,5 +56,9 @@ public class Picture {
     public void decrementLikes() {
         mLikes--;
     }
+
+    public boolean isLiked() { return mLiked; }
+
+    public void setLiked(boolean liked) { mLiked = liked; }
 
 }

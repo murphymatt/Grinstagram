@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class ImageListAdapter extends ArrayAdapter<Picture> {
 
-    public ImageListAdapter(Context context, int resource, List<Picture> objects) {
-        super(context, resource, objects);
+    public ImageListAdapter(Context context, int resource) {
+        super(context, resource);
 
     }
     /**

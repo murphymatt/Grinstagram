@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="4dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="4dp">
 
     <!-- TODO: make distinct values for width and height -->
     <ImageView
@@ -19,6 +21,10 @@
         android:gravity="right">
 
         <!-- TODO: set image buttons-->
+        <TextView
+            android:id="@+id/likeNum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <ImageButton
             android:id="@+id/like"
@@ -48,6 +54,27 @@
             android:layout_alignParentEnd="true"/>
 
     </LinearLayout>
+
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ael_expanded="false"
+        app:ael_duration="500"
+        app:ael_interpolator="bounce"
+        app:ael_orientation="vertical">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/toggle_comments_text"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text"/>
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
     <Button
         android:id="@+id/toggle_comments"

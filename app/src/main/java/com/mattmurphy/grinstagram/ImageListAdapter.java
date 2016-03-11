@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -55,9 +54,6 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                 }
             });
 
-            ExpandableRelativeLayout commentsView
-                    = (ExpandableRelativeLayout) convertView.findViewById(R.id.expandableLayout);
-            TextView comments = (TextView) convertView.findViewById(R.id.text);
 
             Picasso.with(getContext()).load(pic.getImageUrl()).into(image);
             //comments.setText(pic.getComments());

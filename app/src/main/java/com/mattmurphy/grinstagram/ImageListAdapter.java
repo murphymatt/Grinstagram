@@ -44,13 +44,14 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
-            likeNum.setText(pic.getLikes());
+            likeNum.setText(Integer.toString(pic.getLikes()));
 
             // when like button is clicked, increment the likes
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     pic.incrementLikes();
+                    ((ImageButton) v).setImageResource(R.mipmap.ic_favorite_border_black_24dp);
                 }
             });
 

@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ImageListAdapter(this, R.layout.image_list_item);
         lv.setAdapter(mAdapter);
 
+        // AsyncTask
         loadPictureList();
 
         // create progress bar

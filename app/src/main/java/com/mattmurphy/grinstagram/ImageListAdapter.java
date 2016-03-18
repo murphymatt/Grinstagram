@@ -1,7 +1,6 @@
 package com.mattmurphy.grinstagram;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +44,14 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
+            like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
+                    : R.drawable.ic_favorite_border_black_24dp);
             likeNum.setText(Integer.toString(pic.getLikes()));
 
             // when like button is clicked, increment the likes
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("like", "like clicked");
                     if(pic.isLiked()) {
                         pic.decrementLikes();
                         pic.setLiked(false);

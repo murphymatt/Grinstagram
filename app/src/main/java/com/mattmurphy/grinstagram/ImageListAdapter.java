@@ -1,6 +1,12 @@
 package com.mattmurphy.grinstagram;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
+
+import java.io.OutputStream;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Mattori on 2/22/16.
@@ -43,6 +54,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
         if (pic != null) {
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
+            ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
             TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
             like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
                     : R.drawable.ic_favorite_border_black_24dp);
@@ -64,8 +76,14 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                 }
             });
 
+            share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new ImageLoadTask(getContext()).execute(pic);
+                }
+            });
 
-            Picasso.with(getContext()).load(pic.getImageUrl()).into(image);
+            Glide.with(getContext()).load(pic.getImageUrl()).into(image);
             //comments.setText(pic.getComments());
         }
 

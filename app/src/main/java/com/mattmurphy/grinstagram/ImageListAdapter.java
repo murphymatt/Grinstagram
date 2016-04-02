@@ -5,20 +5,30 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by Mattori on 2/22/16.
@@ -53,6 +63,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             final ImageView image = (ImageView) convertView.findViewById(R.id.image);
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
+            ImageButton download = (ImageButton) convertView.findViewById(R.id.download);
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
             like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
                     : R.drawable.ic_favorite_border_black_24dp);
@@ -82,14 +93,42 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                 public void onClick(View v) {
                     Drawable d = image.getDrawable();
                     Bitmap b = ((GlideBitmapDrawable) d).getBitmap();
+                    Log.d("share", "b.tostr: " + b.toString());
                     Intent share = new Intent();
                     String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
                             b, "Image desc", null);
+                    Log.d("share", "path: " + path);
                     Uri uri = Uri.parse(path);
+                    Log.d("share", "uri: " + uri);
                     share.setAction(Intent.ACTION_SEND);
                     share.putExtra(Intent.EXTRA_STREAM, uri);
                     share.setType("image/*");
                     getContext().startActivity(Intent.createChooser(share, "Share Image"));
+                }
+            });
+
+            download.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                    String fname = URLUtil.guessFileName(pic.getImageUrl(), null, "image/*");
+                    File f = new File(dir, fname);
+                    Drawable d = image.getDrawable();
+                    Bitmap b = ((GlideBitmapDrawable) d).getBitmap();
+                    try {
+                        dir.mkdirs();
+
+                        OutputStream os = new FileOutputStream(f);
+                        b.compress(Bitmap.CompressFormat.PNG, 100, os);
+                        os.close();
+
+                        MediaScannerConnection.scanFile(getContext(),
+                                new String[]{f.toString()}, null, null);
+
+                        Toast.makeText(getContext(), "Saved " + fname + " successfully!", Toast.LENGTH_SHORT);
+                    } catch (IOException e) {
+                        Toast.makeText(getContext(), "Error saving " + fname + "!", Toast.LENGTH_SHORT);
+                    }
                 }
             });
 

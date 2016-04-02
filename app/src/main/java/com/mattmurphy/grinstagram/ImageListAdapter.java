@@ -1,6 +1,13 @@
 package com.mattmurphy.grinstagram;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
 /**
  * Created by Mattori on 2/22/16.
@@ -42,7 +50,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
         if (pic != null) {
 
             // create references to view items
-            ImageView image = (ImageView) convertView.findViewById(R.id.image);
+            final ImageView image = (ImageView) convertView.findViewById(R.id.image);
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
@@ -72,7 +80,16 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new ImageLoadTask(getContext()).execute(pic);
+                    Drawable d = image.getDrawable();
+                    Bitmap b = ((GlideBitmapDrawable) d).getBitmap();
+                    Intent share = new Intent();
+                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
+                            b, "Image desc", null);
+                    Uri uri = Uri.parse(path);
+                    share.setAction(Intent.ACTION_SEND);
+                    share.putExtra(Intent.EXTRA_STREAM, uri);
+                    share.setType("image/*");
+                    getContext().startActivity(Intent.createChooser(share, "Share Image"));
                 }
             });
 

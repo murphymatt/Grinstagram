@@ -125,9 +125,9 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                         MediaScannerConnection.scanFile(getContext(),
                                 new String[]{f.toString()}, null, null);
 
-                        Toast.makeText(getContext(), "Saved " + fname + " successfully!", Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(), "Saved " + fname + " successfully!", Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
-                        Toast.makeText(getContext(), "Error saving " + fname + "!", Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(), "Error saving " + fname + "!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -3,7 +3,6 @@ package com.mattmurphy.grinstagram;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,7 +27,6 @@ import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -67,6 +66,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
             like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
                     : R.drawable.ic_favorite_border_black_24dp);
+            Button viewComments = (Button) convertView.findViewById(R.id.view_comments);
             ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
             likeNum.setText(Integer.toString(pic.getLikes()));
 
@@ -89,16 +89,31 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             });
 
             share.setOnClickListener(new View.OnClickListener() {
+                void fixMediaDir() {
+                    File sdcard = Environment.getExternalStorageDirectory();
+                    if (sdcard != null) {
+                        File mediaDir = new File(sdcard, "DCIM/Camera");
+                        if (!mediaDir.exists()) {
+                            mediaDir.mkdirs();
+                        }
+                    }
+                }
+
                 @Override
                 public void onClick(View v) {
                     Drawable d = image.getDrawable();
                     Bitmap b = ((GlideBitmapDrawable) d).getBitmap();
                     Log.d("share", "b.tostr: " + b.toString());
+                    Log.d("share", Integer.toString(b.getPixel(10, 10)));
                     Intent share = new Intent();
-                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
-                            b, "Image desc", null);
-                    Log.d("share", "path: " + path);
-                    Uri uri = Uri.parse(path);
+                    String fpath = null;
+
+                    fixMediaDir();
+                    fpath = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), b,
+                            "image", null);
+
+                    Log.d("share", "path: " + fpath);
+                    Uri uri = Uri.parse(fpath);
                     Log.d("share", "uri: " + uri);
                     share.setAction(Intent.ACTION_SEND);
                     share.putExtra(Intent.EXTRA_STREAM, uri);
@@ -129,6 +144,13 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                     } catch (IOException e) {
                         Toast.makeText(getContext(), "Error saving " + fname + "!", Toast.LENGTH_SHORT).show();
                     }
+                }
+            });
+
+            viewComments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getContext().startActivity(new Intent(getContext(), CommentActivity.class));
                 }
             });
 

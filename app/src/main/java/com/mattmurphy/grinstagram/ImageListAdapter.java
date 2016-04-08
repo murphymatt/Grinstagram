@@ -36,6 +36,7 @@ import java.io.OutputStream;
  */
 public class ImageListAdapter extends ArrayAdapter<Picture> {
 
+    public final static String EXTRA_COMMENTS = "comments";
 
     public ImageListAdapter(Context context, int resource) {
         super(context, resource);
@@ -150,7 +151,9 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             viewComments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getContext().startActivity(new Intent(getContext(), CommentActivity.class));
+                    Intent intent = new Intent(getContext(), CommentActivity.class);
+                    intent.putStringArrayListExtra(EXTRA_COMMENTS, pic.getComments());
+                    getContext().startActivity(intent);
                 }
             });
 

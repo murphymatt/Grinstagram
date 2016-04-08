@@ -12,7 +12,7 @@ public class Picture {
     // Fields
     private int mId;
     private String mImageUrl;
-    private List<String> mComments;
+    private ArrayList<String> mComments;
     private int mLikes;
     private boolean mLiked;
 
@@ -24,7 +24,7 @@ public class Picture {
         mLikes = 0;
     }
 
-    public Picture(int id, String imageUrl, boolean liked, int likes, List<String> comments) {
+    public Picture(int id, String imageUrl, boolean liked, int likes, ArrayList<String> comments) {
         mId = id;
         mImageUrl = imageUrl;
         mLiked = liked;
@@ -37,7 +37,7 @@ public class Picture {
         return mImageUrl;
     }
 
-    public List<String> getComments() {
+    public ArrayList<String> getComments() {
         return mComments;
     }
 

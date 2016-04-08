@@ -47,7 +47,7 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
                 for (int i = 0; i < images.length(); i++) {
                     JSONObject obj = images.getJSONObject(i);
 
-                    List<String> comments = new ArrayList<>();
+                    ArrayList<String> comments = new ArrayList<>();
                     JSONArray arr = obj.getJSONArray("comments");
                     for (int n = 0; n < arr.length(); n++) {
                         comments.add(arr.getString(n));

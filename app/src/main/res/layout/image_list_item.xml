@@ -44,6 +44,12 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true">
 
+            <Button
+                android:id="@+id/view_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_comments_text"/>
+
             <ImageButton
                 android:id="@+id/like"
                 android:layout_width="wrap_content"
@@ -65,10 +71,5 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/view_comments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_comments_text"/>
 
 </LinearLayout>

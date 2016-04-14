@@ -3,6 +3,7 @@ package com.mattmurphy.grinstagram;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -67,6 +68,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
             like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
                     : R.drawable.ic_favorite_border_black_24dp);
+            if(pic.isLiked()) like.setColorFilter(Color.rgb(255, 0, 0));
             Button viewComments = (Button) convertView.findViewById(R.id.view_comments);
             ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
             likeNum.setText(Integer.toString(pic.getLikes()));
@@ -79,11 +81,13 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                         pic.decrementLikes();
                         pic.setLiked(false);
                         ((ImageButton) v).setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                        ((ImageButton) v).clearColorFilter();
                         likeNum.setText(Integer.toString(pic.getLikes()));
                     } else {
                         pic.incrementLikes();
                         pic.setLiked(true);
                         ((ImageButton) v).setImageResource(R.drawable.ic_favorite_black_24dp);
+                        ((ImageButton) v).setColorFilter(Color.rgb(255, 0, 0));
                         likeNum.setText(Integer.toString(pic.getLikes()));
                     }
                 }

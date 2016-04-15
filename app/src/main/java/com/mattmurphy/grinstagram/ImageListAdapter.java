@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -65,11 +66,13 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
             ImageButton download = (ImageButton) convertView.findViewById(R.id.download);
+            ImageButton viewComments = (ImageButton) convertView.findViewById(R.id.view_comments);
+
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
             like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
                     : R.drawable.ic_favorite_border_black_24dp);
             if(pic.isLiked()) like.setColorFilter(Color.rgb(255, 0, 0));
-            Button viewComments = (Button) convertView.findViewById(R.id.view_comments);
+
             ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
             likeNum.setText(Integer.toString(pic.getLikes()));
 

@@ -1,5 +1,6 @@
 package com.mattmurphy.grinstagram;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -23,13 +24,15 @@ public class CommentActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // editText
         Button addComment = (Button) findViewById(R.id.add_comment);
         final EditText commenting = (EditText) findViewById(R.id.edit_comment);
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.add(commenting.getText().toString());
-                commenting.getText().clear();
+                String toAdd = commenting.getText().toString();
+                if (toAdd != null && toAdd != "") { adapter.add(toAdd); }
+                commenting.setText("");
             }
         });
     }

@@ -63,7 +63,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             final ImageView image = (ImageView) convertView.findViewById(R.id.image);
 
             // set image dimensions
-            image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             ImageButton share = (ImageButton) convertView.findViewById(R.id.share);

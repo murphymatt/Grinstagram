@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -69,9 +67,14 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             ImageButton viewComments = (ImageButton) convertView.findViewById(R.id.view_comments);
 
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
-            like.setImageResource(pic.isLiked() ? R.drawable.ic_favorite_black_24dp
-                    : R.drawable.ic_favorite_border_black_24dp);
-            if(pic.isLiked()) like.setColorFilter(Color.rgb(255, 0, 0));
+            Log.d("liked", Boolean.toString(pic.isLiked()));
+            if(pic.isLiked()) {
+                like.setImageResource(R.drawable.ic_favorite_black_24dp);
+                like.setColorFilter(Color.rgb(255, 0, 0));
+            } else {
+                like.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                like.clearColorFilter();
+            }
 
             ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
             likeNum.setText(Integer.toString(pic.getLikes()));

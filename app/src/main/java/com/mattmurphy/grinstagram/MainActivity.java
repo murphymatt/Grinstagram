@@ -108,13 +108,6 @@ public class MainActivity extends AppCompatActivity implements UserLoadResult {
         // add progress bar to root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(mProgressBar);
-
-        (findViewById(R.id.show_users)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Users: " + mUsers.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     /**

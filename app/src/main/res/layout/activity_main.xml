@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/show_users"
-        android:text="Show users"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"></Button>
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"

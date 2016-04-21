@@ -2,6 +2,7 @@ package com.mattmurphy.grinstagram;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -24,9 +25,11 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
     private ArrayAdapter mAdapter;
     private Context mContext;
     private Exception mException;
+    private List<User> mUsers;
 
-    public LoadPicturesTask(Context context) {
+    public LoadPicturesTask(Context context, List<User> users) {
         mContext = context;
+        mUsers = users;
     }
 
     @Override
@@ -53,7 +56,16 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
                         comments.add(arr.getString(n));
                     }
 
-                    Picture p = new Picture(obj.getInt("id"), obj.getString("url"),
+                    User user = null;
+                    int uid = obj.getInt("uid");
+                    for (User u : mUsers) {
+                        if (u.getUid() == uid) user = u;
+                    }
+                    if (user == null) {
+                        Toast.makeText(mContext, "Error while parsing image " + obj.getInt("id"), Toast.LENGTH_LONG).show();
+                    }
+
+                    Picture p = new Picture(obj.getInt("id"), user, obj.getString("url"),
                             obj.getBoolean("liked"), obj.getInt("likes"), comments);
                     pics.add(p);
                 }
@@ -61,7 +73,8 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
 
             return pics;
         } catch (Exception e) {
-            cancel(false);
+            Log.d("picloading", e.getMessage());
+            cancel(true);
             mException = e;
             return null;
         }
@@ -78,6 +91,6 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
     protected void onCancelled() {
         Toast.makeText(mContext,
                 "An error occurred while loading picture information:\n" + mException.getMessage(),
-                Toast.LENGTH_LONG);
+                Toast.LENGTH_LONG).show();
     }
 }

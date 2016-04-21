@@ -80,6 +80,9 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                 like.clearColorFilter();
             }
 
+            TextView poster = (TextView) convertView.findViewById(R.id.poster);
+            poster.setText(pic.getUser().getUsername());
+
             ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
             likeNum.setText(Integer.toString(pic.getLikes()));
 

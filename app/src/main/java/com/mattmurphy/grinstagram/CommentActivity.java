@@ -31,7 +31,7 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String toAdd = commenting.getText().toString();
-                if (toAdd != null && toAdd != "") { adapter.add(toAdd); }
+                if (toAdd != null && !toAdd.equals("")) { adapter.add(toAdd); }
                 commenting.setText("");
             }
         });

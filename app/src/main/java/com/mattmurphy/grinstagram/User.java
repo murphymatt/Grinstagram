@@ -7,14 +7,17 @@ public class User {
 
     private int mUid;
     private String mUsername;
+    // private String mProfileUrl;
 
-    public User(int uid, String uname) {
+    public User(int uid, String uname /*, String profileUrl */) {
         mUid = uid;
         mUsername = uname;
+        /* mProfileUrl = profileUrl; */
     }
 
     public int getUid() { return mUid; }
     public String getUsername() { return mUsername; }
+    // public String getProfileUrl() { return mProfileUrl; }
 
     @Override
     public String toString() {

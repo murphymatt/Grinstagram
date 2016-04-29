@@ -80,6 +80,8 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                 like.clearColorFilter();
             }
 
+            // create user and profile picture
+            // ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
             TextView poster = (TextView) convertView.findViewById(R.id.poster);
             poster.setText(pic.getUser().getUsername());
 
@@ -178,6 +180,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             if (image != null) {
                 progressBar.setVisibility(View.GONE);
             }
+            // Glide.with(getContext()).load(pic.getUser().getProfileUrl()).into(profile);
         }
 
         return convertView;

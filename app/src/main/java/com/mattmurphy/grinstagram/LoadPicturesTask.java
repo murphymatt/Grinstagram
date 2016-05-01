@@ -1,10 +1,13 @@
 package com.mattmurphy.grinstagram;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -26,10 +29,18 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
     private Context mContext;
     private Exception mException;
     private List<User> mUsers;
+    private ProgressBar mProgressBar;
 
-    public LoadPicturesTask(Context context, List<User> users) {
+    public LoadPicturesTask( Context context, List<User> users) {
         mContext = context;
         mUsers = users;
+        mProgressBar = (ProgressBar)((Activity)context).findViewById(R.id.progress);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -85,6 +96,7 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
         mAdapter.clear();
         mAdapter.addAll(pictures);
         mAdapter.notifyDataSetChanged();
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override

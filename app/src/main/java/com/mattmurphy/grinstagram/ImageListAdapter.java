@@ -9,6 +9,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +18,11 @@ import android.webkit.URLUtil;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,7 +31,7 @@ import java.io.OutputStream;
 
 /**
  * Created by Mattori on 2/22/16.
- *
+ * <p/>
  * Manages the image list items' views.
  */
 public class ImageListAdapter extends ArrayAdapter<Picture> {
@@ -46,14 +44,15 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
 
     /**
      * TODO: set the contents of image, like, and share based on Firebase
-     * @param pos Position in array
+     *
+     * @param pos         Position in array
      * @param convertView The old view, if non-null
-     * @param parent The parent ViewGroup
+     * @param parent      The parent ViewGroup
      * @return The image list item's View
      */
 
     public View getView(int pos, View convertView, ViewGroup parent) {
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.image_list_item, parent, false);
         }
 
@@ -77,7 +76,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
 
             final TextView likeNum = (TextView) convertView.findViewById(R.id.likeNum);
             Log.d("liked", Boolean.toString(pic.isLiked()));
-            if(pic.isLiked()) {
+            if (pic.isLiked()) {
                 like.setImageResource(R.drawable.ic_favorite_black_24dp);
                 like.setColorFilter(Color.rgb(255, 0, 0));
             } else {
@@ -90,7 +89,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             TextView poster = (TextView) convertView.findViewById(R.id.poster);
             poster.setText(pic.getUser().getUsername());
 
-            ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
+            // ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress);
             likeNum.setText(Integer.toString(pic.getLikes()));
 
             // when like button is clicked, increment the likes
@@ -181,9 +180,11 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                 }
             });
 
+
             Glide.with(getContext()).load(pic.getImageUrl()).into(image);
             if (image != null) {
-                progressBar.setVisibility(View.GONE);
+                image.setImageDrawable(ResourcesCompat.getDrawable(getContext().getResources(),
+                        R.drawable.soft_gray, null));
             }
             // Glide.with(getContext()).load(pic.getUser().getProfileUrl()).into(profile);
         }

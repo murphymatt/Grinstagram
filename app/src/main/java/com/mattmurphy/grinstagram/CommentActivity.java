@@ -1,5 +1,6 @@
 package com.mattmurphy.grinstagram;
 
+import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class CommentActivity extends AppCompatActivity {
@@ -25,7 +27,9 @@ public class CommentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // editText
-        Button addComment = (Button) findViewById(R.id.add_comment);
+        ImageButton addComment = (ImageButton) findViewById(R.id.send);
+        addComment.setColorFilter(Color.WHITE);
+
         final EditText commenting = (EditText) findViewById(R.id.edit_comment);
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override

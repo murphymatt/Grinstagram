@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -64,6 +66,9 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
 
             // set image dimensions
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+            TextView caption = (TextView) convertView.findViewById(R.id.imageCaption);
+            // caption.setText(pic.getCaption());
 
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             ImageButton share = (ImageButton) convertView.findViewById(R.id.share);

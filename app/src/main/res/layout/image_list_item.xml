@@ -25,7 +25,8 @@
             android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:paddingBottom="8dp"/>
 
     </RelativeLayout>
 
@@ -49,6 +50,10 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/imageCaption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -63,11 +68,19 @@
             android:gravity="center_vertical"
             android:id="@+id/linearLayout">
 
+            <TextView
+                android:id="@+id/likeNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingLeft="24dp"/>
+
             <ImageButton
                 android:id="@+id/like"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                />
 
             <ImageButton
                 android:id="@+id/view_comments"
@@ -100,6 +113,7 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"/>
 
+    <!--
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -119,13 +133,11 @@
                 android:layout_height="15dp"
                 android:src="@drawable/ic_favorite_black_24dp"/>
 
-            <TextView
-                android:id="@+id/likeNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 
     </RelativeLayout>
+    -->
 
 </LinearLayout>

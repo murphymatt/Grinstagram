@@ -35,7 +35,6 @@ public class LoadUsersTask extends AsyncTask<Void, Void, List<User>> {
     @Override
     protected List<User> doInBackground(Void... params) {
         try {
-            List<Picture> pics = new ArrayList();
             OkHttpClient client = new OkHttpClient();
             Request req = new Request.Builder()
                     .url("http://www.cs.grinnell.edu/~birnbaum/grinstagram/grinstagram-users.json")
@@ -47,7 +46,7 @@ public class LoadUsersTask extends AsyncTask<Void, Void, List<User>> {
             List<User> users = new ArrayList<>();
             for (int i = 0; i < usersJs.length(); i++) {
                 JSONObject user = usersJs.getJSONObject(i);
-                users.add(new User(user.getInt("uid"), user.getString("uname")));
+                users.add(new User(user.getInt("uid"), user.getString("uname"), user.getString("pic")));
             }
             return users;
         } catch (Exception e) {

@@ -19,20 +19,20 @@ public class Picture {
     private User mUser;
 
     // Constructor
-    public Picture(int id, User user, String imageUrl /*, String caption */) {
+    public Picture(int id, User user, String imageUrl , String caption) {
         mId = id;
         mImageUrl = imageUrl;
-        // mCaption = caption;
+        mCaption = caption;
         mComments = new ArrayList<String>();
         mLikes = 0;
         mUser = user;
     }
 
-    public Picture(int id, User user, String imageUrl, /* String caption,*/ boolean liked, int likes, ArrayList<String> comments) {
+    public Picture(int id, User user, String imageUrl, String caption, boolean liked, int likes, ArrayList<String> comments) {
         mId = id;
         mUser = user;
         mImageUrl = imageUrl;
-        // mCaption = caption;
+        mCaption = caption;
         mLiked = liked;
         mLikes = likes;
         mComments = comments;
@@ -43,7 +43,7 @@ public class Picture {
         return mImageUrl;
     }
 
-    // public String getCaption() { return mCaption; }
+    public String getCaption() { return mCaption; }
 
     public ArrayList<String> getComments() {
         return mComments;

@@ -77,7 +77,7 @@ public class LoadPicturesTask extends AsyncTask<ArrayAdapter, Void, List<Picture
                     }
 
                     Picture p = new Picture(obj.getInt("id"), user, obj.getString("url"),
-                            /* obj.getString("caption"), */ obj.getBoolean("liked"), obj.getInt("likes"), comments);
+                            obj.getString("caption"), obj.getBoolean("liked"), obj.getInt("likes"), comments);
                     pics.add(p);
                 }
             }

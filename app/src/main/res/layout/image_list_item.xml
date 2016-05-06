@@ -5,28 +5,39 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp">
+        android:layout_width="399dp"
+        android:layout_height="58dp"
+        android:paddingLeft="8dp">
 
-        <!--
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@+id/profile"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/default_profile"
             app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"/>
+            app:civ_border_color="#FF000000"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="42dp"/>
+        <!--
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
         -->
 
         <TextView
             android:id="@+id/poster"
-            android:textSize="20dp"
+            android:text="Matt Murphy"
+            android:textSize="20sp"
+            android:paddingLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:paddingBottom="8dp"/>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_image"
+            android:layout_toEndOf="@+id/profile_image"/>
 
     </RelativeLayout>
 
@@ -37,25 +48,20 @@
 
         <ImageView
             android:id="@+id/image"
+            android:src="@drawable/soft_gray"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>
-
-        <!--
-        <ProgressBar
-            android:id="@+id/progress"
-            style="?android:attr/progressBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="visible"/>
-            -->
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"/>
 
     </RelativeLayout>
 
     <TextView
         android:id="@+id/imageCaption"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
+        android:paddingTop="16dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -81,8 +87,7 @@
                 android:id="@+id/like"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@android:color/transparent"
-                />
+                android:background="@android:color/transparent"/>
 
             <ImageButton
                 android:id="@+id/view_comments"
@@ -112,7 +117,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="?android:attr/listDivider"/>
 
     <!--

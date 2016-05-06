@@ -29,6 +29,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by Mattori on 2/22/16.
  * <p/>
@@ -64,10 +66,10 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             final ImageView image = (ImageView) convertView.findViewById(R.id.image);
 
             // set image dimensions
-            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            //image.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
             TextView caption = (TextView) convertView.findViewById(R.id.imageCaption);
-            // caption.setText(pic.getCaption());
+            caption.setText(pic.getCaption());
 
             ImageButton like = (ImageButton) convertView.findViewById(R.id.like);
             ImageButton share = (ImageButton) convertView.findViewById(R.id.share);
@@ -85,7 +87,8 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             }
 
             // create user and profile picture
-            // ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
+            CircleImageView profile = (CircleImageView) convertView.findViewById(R.id.profile_image);
+            // ImageView profile = (ImageView) convertView.findViewById(R.id.profile_image);
             TextView poster = (TextView) convertView.findViewById(R.id.poster);
             poster.setText(pic.getUser().getUsername());
 
@@ -182,11 +185,11 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
 
 
             Glide.with(getContext()).load(pic.getImageUrl()).into(image);
-            if (image != null) {
-                image.setImageDrawable(ResourcesCompat.getDrawable(getContext().getResources(),
-                        R.drawable.soft_gray, null));
-            }
-            // Glide.with(getContext()).load(pic.getUser().getProfileUrl()).into(profile);
+//            if (image != null) {
+//                image.setImageDrawable(ResourcesCompat.getDrawable(getContext().getResources(),
+//                        R.drawable.soft_gray, null));
+//            }
+            Glide.with(getContext()).load(pic.getUser().getProfileUrl()).into(profile);
         }
 
         return convertView;

@@ -1,6 +1,6 @@
 package com.mattmurphy.grinstagram;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -37,9 +37,13 @@ import java.io.OutputStream;
 public class ImageListAdapter extends ArrayAdapter<Picture> {
 
     public final static String EXTRA_COMMENTS = "comments";
+    public final static String EXTRA_INDEX = "index";
+    public final static int COMMENTS_REQUEST_CODE = 1;
+    private Activity mParent;
 
-    public ImageListAdapter(Context context, int resource) {
-        super(context, resource);
+    public ImageListAdapter(Activity parent, int resource) {
+        super(parent, resource);
+        mParent = parent;
     }
 
     /**
@@ -51,9 +55,9 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
      * @return The image list item's View
      */
 
-    public View getView(int pos, View convertView, ViewGroup parent) {
+    public View getView(final int pos, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.image_list_item, parent, false);
+            convertView = LayoutInflater.from(mParent).inflate(R.layout.image_list_item, parent, false);
         }
 
         final Picture pic = ImageListAdapter.super.getItem(pos);
@@ -133,7 +137,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                     String fpath = null;
 
                     fixMediaDir();
-                    fpath = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), b,
+                    fpath = MediaStore.Images.Media.insertImage(mParent.getContentResolver(), b,
                             "image", null);
 
                     Log.d("share", "path: " + fpath);
@@ -142,7 +146,7 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                     share.setAction(Intent.ACTION_SEND);
                     share.putExtra(Intent.EXTRA_STREAM, uri);
                     share.setType("image/*");
-                    getContext().startActivity(Intent.createChooser(share, "Share Image"));
+                    mParent.startActivity(Intent.createChooser(share, "Share Image"));
                 }
             });
 
@@ -161,12 +165,12 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
                         b.compress(Bitmap.CompressFormat.PNG, 100, os);
                         os.close();
 
-                        MediaScannerConnection.scanFile(getContext(),
+                        MediaScannerConnection.scanFile(mParent,
                                 new String[]{f.toString()}, null, null);
 
-                        Toast.makeText(getContext(), "Saved " + fname + " successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mParent, "Saved " + fname + " successfully!", Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
-                        Toast.makeText(getContext(), "Error saving " + fname + "!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mParent, "Error saving " + fname + "!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -174,19 +178,20 @@ public class ImageListAdapter extends ArrayAdapter<Picture> {
             viewComments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), CommentActivity.class);
+                    Intent intent = new Intent(mParent, CommentActivity.class);
                     intent.putStringArrayListExtra(EXTRA_COMMENTS, pic.getComments());
-                    getContext().startActivity(intent);
+                    intent.putExtra(EXTRA_INDEX, pos);
+                    mParent.startActivityForResult(intent, COMMENTS_REQUEST_CODE);
                 }
             });
 
 
-            Glide.with(getContext()).load(pic.getImageUrl()).into(image);
+            Glide.with(mParent).load(pic.getImageUrl()).into(image);
             if (image != null) {
-                image.setImageDrawable(ResourcesCompat.getDrawable(getContext().getResources(),
+                image.setImageDrawable(ResourcesCompat.getDrawable(mParent.getResources(),
                         R.drawable.soft_gray, null));
             }
-            // Glide.with(getContext()).load(pic.getUser().getProfileUrl()).into(profile);
+            // Glide.with(mParent).load(pic.getUser().getProfileUrl()).into(profile);
         }
 
         return convertView;

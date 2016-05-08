@@ -49,9 +49,13 @@ public class Picture {
         return mComments;
     }
 
-    public void addComments(String comment) {
+    public void addComment(String comment) {
         mComments.add(comment);
     }
+
+    public void addAllComments(ArrayList<String> comments) { mComments.addAll(comments); }
+
+    public void clearComments() { mComments.clear(); }
 
     public int getLikes() {
         return mLikes;

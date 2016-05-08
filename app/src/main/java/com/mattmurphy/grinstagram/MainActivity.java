@@ -1,19 +1,19 @@
 package com.mattmurphy.grinstagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.util.Log;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -172,4 +172,22 @@ public class MainActivity extends AppCompatActivity implements UserLoadResult {
         mUsers = users;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("comment", "onActivityResult");
+        switch(requestCode) {
+            case ImageListAdapter.COMMENTS_REQUEST_CODE:
+                int index = data.getIntExtra(ImageListAdapter.EXTRA_INDEX, -1);
+                Log.d("comment", "onActivityResult comment activity");
+                Log.d("comment", "result code == RESULT_OK: " + (resultCode == RESULT_OK));
+                Log.d("comment", "result code == RESULT_CANCELLED: " + (resultCode == RESULT_CANCELED));
+                Log.d("comment", "index: " + index);
+                if(resultCode == RESULT_OK) {
+                    ArrayList<String> comments = data.getStringArrayListExtra(ImageListAdapter.EXTRA_COMMENTS);
+                    Log.d("comment", "comments: " + comments);
+                    mAdapter.getItem(index).clearComments();
+                    mAdapter.getItem(index).addAllComments(comments);
+                }
+        }
+    }
 }
